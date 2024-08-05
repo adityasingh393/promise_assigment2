@@ -13,23 +13,28 @@ const fetchWithRetry = (url, retries) => {
   return new Promise((res, rej) => {
     fetch(url)
       .then((response) => {
-        res(response.json());
+         return (response.json());
       })
-      .catch((error) => {
-        if (retries === 1) {
-          return rej(error);
+      .catch(error => {
+        if (retries === 0) {
+        
+        return rej(error);
         }
+        else{
+          console.log(`Retrying`);
         fetchWithRetry(url, retries - 1)
           .then((response) => {
             res(response.json());
           })
           .catch((error) => {
+           
             rej(error);
           });
+        }
       });
   });
 };
-fetchWithRetry("https://freetestapi.com/api/v1/weathers/1", 3)
+fetchWithRetry("https://freetestapi.com/api/v1/weathersd/1", 4)
   .then((data) => {
     console.log(data);
   })
