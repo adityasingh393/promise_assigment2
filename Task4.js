@@ -13,23 +13,20 @@ const fetchWithRetry = (url, retries) => {
   return new Promise((res, rej) => {
     fetch(url)
       .then((response) => {
-         return (response.json());
+        return response.json();
       })
-      .catch(error => {
+      .catch((error) => {
         if (retries === 0) {
-        
-        return rej(error);
-        }
-        else{
+          return rej(error);
+        } else {
           console.log(`Retrying`);
-        fetchWithRetry(url, retries - 1)
-          .then((response) => {
-            res(response.json());
-          })
-          .catch((error) => {
-           
-            rej(error);
-          });
+          fetchWithRetry(url, retries - 1)
+            .then((response) => {
+              res(response.json());
+            })
+            .catch((error) => {
+              rej(error);
+            });
         }
       });
   });
@@ -39,5 +36,5 @@ fetchWithRetry("https://freetestapi.com/api/v1/weathersd/1", 4)
     console.log(data);
   })
   .catch((error) => {
-    console.log(error);
+    console.log("error happedn");
   });

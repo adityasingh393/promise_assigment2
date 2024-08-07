@@ -7,7 +7,7 @@
 const fetchWithRace = (urls, time) => {
   const timeoutPromise = new Promise((res, rej) => {
     setTimeout(() => {
-      rej("timout");
+    rej("timout");
     }, time);
   });
 

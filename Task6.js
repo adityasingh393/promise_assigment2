@@ -45,5 +45,5 @@ fetchAllWithError(urls)
     console.log(results);
   })
   .catch((error) => {
-    console.error(error);
+    console.error("eror happened");
   });
